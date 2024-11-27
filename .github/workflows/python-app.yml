@@ -1,0 +1,39 @@
+name: CI/CD for FastAPI App
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Start FastAPI for testing
+      run: |
+        uvicorn patentes:app --host 127.0.0.1 --port 8000 --log-level warning &
+        sleep 5
+      env:
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        EXCEL_PATH: "C:/Users/Raul/Downloads/patentes/Caducidades_Patentes_Europeas_2024.xlsx"
+
+    - name: Test FastAPI health endpoint
+      run: |
+        curl -f http://127.0.0.1:8000 || echo "Health check failed"
