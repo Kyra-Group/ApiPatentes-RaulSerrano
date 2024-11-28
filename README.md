@@ -47,9 +47,9 @@ Este proyecto tiene configurado GitHub Actions para automatizar la integración 
 
 Flujo de trabajo en GitHub Actions:
 1. Instalación de dependencias: El flujo comienza instalando todas las dependencias necesarias desde requirements.txt.
-2. Ejecución de pruebas: 
+2. Ejecución de pruebas: Información sobre cómo ejecutar pruebas utilizando pytest.
 3. Prueba de la API: Se realiza una prueba básica para verificar que la API está respondiendo correctamente.
-4. Despliegue:
+4. Despliegue: El flujo usa GitHub Actions para hacer pruebas automáticas y simular un despliegue.
 
 Configuración del archivo de flujo en GitHub Actions:
 El flujo de trabajo está configurado en el archivo .github/workflows/ci-cd.yml. Este flujo se ejecutará cada vez que se haga un push de código a la rama main o se cree un pull request a esa rama. El archivo ci-cd.yml configura la instalación de dependencias, la puesta en marcha de la API y la verificación de que todo esté funcionando correctamente.
